@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">04042020-JoshKane-NYCSchools</string>
+    <string name="user_error_msg">Sorry, something went wrong.</string>
+    <string name="description_format">Description: %s</string>
+</resources>
