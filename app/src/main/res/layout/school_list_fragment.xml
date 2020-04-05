@@ -52,8 +52,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/school_list_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/filter_layout" />
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/filter_layout"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

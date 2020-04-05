@@ -68,19 +68,17 @@ public class SchoolListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SchoolListViewModel.class);
-        setupRecyclerView(new ArrayList<>());
+        setupRecyclerView();
         setupObservers();
         setupFilter();
         if (mViewModel.getSchools().getValue() == null) mViewModel.setInitialState(repo);
     }
 
-    private void setupRecyclerView(List<NYCSchool> list) {
-        adapter = new SchoolListRecyclerAdapter(list, stringUtils, photoAPI);
+    private void setupRecyclerView() {
+        adapter = new SchoolListRecyclerAdapter(mViewModel.getFilteredSchools().getValue(), stringUtils, photoAPI);
         binding.schoolListRecycler.setHasFixedSize(true);
         binding.schoolListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.schoolListRecycler.setAdapter(adapter);
-
-        adapter = new SchoolListRecyclerAdapter(mViewModel.getSchools().getValue(), stringUtils, photoAPI);
 
         adapter.setOnItemClickListener((position, v) -> {
             ((MainActivity) getActivity()).showSchoolDetails(adapter.list.get(position));
@@ -139,7 +137,7 @@ public class SchoolListFragment extends Fragment {
                 getViewLifecycleOwner(),
                 schools -> {
                     if (!schools.isEmpty()) {
-                        setupRecyclerView(schools);
+                        adapter.updateData(schools);
                     }
                 }
         );

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +19,7 @@ import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool;
 import com.jkane.a04042020_joshkane_nycschools.network.api.GooglePlacesAPI;
 import com.jkane.a04042020_joshkane_nycschools.network.observers.NetworkObserver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,7 +34,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
     public StringUtils stringUtils;
 
     public SchoolListRecyclerAdapter(List<NYCSchool> list, StringUtils stringUtils, GooglePlacesAPI photoAPI) {
-        this.list = list;
+        this.list = list == null ? new ArrayList<>() : list;
         this.stringUtils = stringUtils;
         this.photoAPI = photoAPI;
     }
@@ -56,8 +58,9 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
         return list.size();
     }
 
-    public void setData(List<NYCSchool> list) {
-        this.list = list;
+    public void updateData(List<NYCSchool> newList) {
+        list.clear();
+        list.addAll(newList);
         notifyDataSetChanged();
     }
 
@@ -99,7 +102,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
          * <p>
          * This was done in place to only load images as they're bound to the recycler.
          * This should probably be moved out to a separate utility class though and called from
-         * here.
+         * here. Hardcoded the url params to save some time.
          *
          * @param schoolName Name of the school to be used for a Google Place Query.
          */
