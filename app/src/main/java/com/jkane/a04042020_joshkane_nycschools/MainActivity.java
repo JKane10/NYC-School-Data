@@ -8,7 +8,11 @@ import android.view.View;
 import com.google.android.material.snackbar.Snackbar;
 import com.jkane.a04042020_joshkane_nycschools.app.App;
 import com.jkane.a04042020_joshkane_nycschools.databinding.MainActivityBinding;
-import com.jkane.a04042020_joshkane_nycschools.ui.main.MainFragment;
+import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool;
+import com.jkane.a04042020_joshkane_nycschools.ui.schoollist.SchoolListFragment;
+import com.jkane.a04042020_joshkane_nycschools.ui.schooldetails.SchoolDetailsFragment;
+
+import static com.jkane.a04042020_joshkane_nycschools.ui.schooldetails.SchoolDetailsFragment.SCHOOL_KEY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, MainFragment.newInstance())
+                    .replace(R.id.container, SchoolListFragment.newInstance())
                     .commitNow();
         }
     }
@@ -37,7 +41,15 @@ public class MainActivity extends AppCompatActivity {
         Snackbar.make(binding.root, errorMsg, Snackbar.LENGTH_SHORT).show();
     }
 
-    public void showSwipeToRefresh(Boolean show) {
-        if (!show) binding.swipeToRefresh.setRefreshing(false);
+    public void showSchoolDetails(NYCSchool nycSchool) {
+        SchoolDetailsFragment fragment = SchoolDetailsFragment.newInstance();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(SCHOOL_KEY, nycSchool);
+        fragment.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

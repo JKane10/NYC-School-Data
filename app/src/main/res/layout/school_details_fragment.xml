@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_spacing">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/header_text_size"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="School name" />
+
+        <!-- Contact Info Section -->
+        <TextView
+            android:id="@+id/contact_info_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_default_spacing"
+            android:text="@string/contact_info"
+            android:textSize="@dimen/header_2"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+        <View
+            android:id="@+id/name_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginBottom="@dimen/default_spacing"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/contact_info_header" />
+
+        <!-- Website Info -->
+        <TextView
+            android:id="@+id/hours_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:text="@string/hours_of_operation"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_divider" />
+
+        <TextView
+            android:id="@+id/hours"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/caret"
+            app:layout_constraintStart_toEndOf="@+id/hours_label"
+            app:layout_constraintTop_toTopOf="@+id/hours_label" />
+
+        <!-- Website Info -->
+        <TextView
+            android:id="@+id/website_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/website"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hours" />
+
+        <TextView
+            android:id="@+id/website"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            android:autoLink="web"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/caret"
+            app:layout_constraintStart_toEndOf="@+id/website_label"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintTop_toTopOf="@+id/website_label" />
+
+        <!-- Phone Info -->
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/website" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            android:autoLink="phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/caret"
+            app:layout_constraintStart_toEndOf="@+id/phone_label"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            app:layout_constraintTop_toTopOf="@+id/phone_label" />
+
+        <!--  Email Info  -->
+        <TextView
+            android:id="@+id/email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_label" />
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            android:autoLink="email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/caret"
+            app:layout_constraintStart_toEndOf="@+id/email_label"
+            app:layout_constraintTop_toBottomOf="@+id/phone_label" />
+
+        <!-- Address Info  -->
+        <TextView
+            android:id="@+id/address_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            android:autoLink="map"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/address_label"
+            app:layout_constraintTop_toTopOf="@+id/address_label" />
+
+        <!--  SAT Score Section  -->
+        <TextView
+            android:id="@+id/scores_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_default_spacing"
+            android:text="@string/sat_score_info"
+            android:textSize="@dimen/header_2"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/address" />
+
+        <View
+            android:id="@+id/scores_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginBottom="@dimen/default_spacing"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/scores_header" />
+
+        <!--  Number of tests  -->
+        <TextView
+            android:id="@+id/num_of_test_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:text="@string/number_of_tests"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scores_divider" />
+
+        <TextView
+            android:id="@+id/num_tests"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/num_of_test_label"
+            app:layout_constraintTop_toTopOf="@+id/num_of_test_label" />
+
+        <!--  Reading Scores  -->
+        <TextView
+            android:id="@+id/read_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/average_reading_score"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/num_tests" />
+
+        <TextView
+            android:id="@+id/read_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/read_score_label"
+            app:layout_constraintTop_toTopOf="@+id/read_score_label" />
+
+        <!--  Math Scores  -->
+        <TextView
+            android:id="@+id/math_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/average_math_score"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/read_score_label" />
+
+        <TextView
+            android:id="@+id/math_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/math_score_label"
+            app:layout_constraintTop_toTopOf="@+id/math_score_label" />
+
+        <!--  Writing Scores  -->
+        <TextView
+            android:id="@+id/writing_score_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/average_writing_score"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/math_score" />
+
+        <TextView
+            android:id="@+id/writing_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/writing_score_label"
+            app:layout_constraintTop_toTopOf="@+id/writing_score_label" />
+
+        <!--  School Overview Section  -->
+        <TextView
+            android:id="@+id/overview_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_default_spacing"
+            android:text="@string/school_overview"
+            android:textSize="@dimen/header_2"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/writing_score" />
+
+        <View
+            android:id="@+id/overview_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginBottom="@dimen/default_spacing"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/overview_header" />
+
+        <TextView
+            android:id="@+id/overview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/overview_divider" />
+
+        <!-- Transportation Info -->
+        <TextView
+            android:id="@+id/transportation_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_default_spacing"
+            android:text="@string/transportation_info"
+            android:textSize="@dimen/header_2"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/overview" />
+
+        <View
+            android:id="@+id/transportation_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginBottom="@dimen/default_spacing"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/transportation_header" />
+
+        <!--  bus info  -->
+        <TextView
+            android:id="@+id/buses_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:text="@string/bus_routes"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/transportation_divider" />
+
+        <TextView
+            android:id="@+id/buses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/buses_label"
+            app:layout_constraintTop_toTopOf="@+id/buses_label" />
+
+        <!--  subway info  -->
+        <TextView
+            android:id="@+id/subway_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/subways"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buses" />
+
+        <TextView
+            android:id="@+id/subway"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/subway_label"
+            app:layout_constraintTop_toTopOf="@+id/subway_label" />
+
+        <!-- Other Info -->
+        <TextView
+            android:id="@+id/misc_info_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/double_default_spacing"
+            android:text="@string/other_school_statistics"
+            android:textSize="@dimen/header_2"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subway" />
+
+        <View
+            android:id="@+id/misc_info_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:layout_marginBottom="@dimen/default_spacing"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/misc_info_header" />
+
+        <!--  attendance  -->
+        <TextView
+            android:id="@+id/attendance_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_spacing"
+            android:text="@string/attendance_rate"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/misc_info_divider" />
+
+        <TextView
+            android:id="@+id/attendance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/attendance_label"
+            app:layout_constraintTop_toTopOf="@+id/attendance_label" />
+
+        <!--  graduation  -->
+        <TextView
+            android:id="@+id/graduation_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/graduation_rate"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/attendance" />
+
+        <TextView
+            android:id="@+id/graduation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/attendance_label"
+            app:layout_constraintTop_toTopOf="@+id/graduation_label" />
+
+        <!--  college rate  -->
+        <TextView
+            android:id="@+id/college_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/college_career_rate"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/graduation" />
+
+        <TextView
+            android:id="@+id/college"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/college_label"
+            app:layout_constraintTop_toTopOf="@+id/college_label" />
+
+        <!--  extracurricular rate  -->
+        <TextView
+            android:id="@+id/extracurricular_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/extracurriculars"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/college" />
+
+        <TextView
+            android:id="@+id/extracurricular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_spacing"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/extracurricular_label"
+            app:layout_constraintTop_toTopOf="@+id/extracurricular_label" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

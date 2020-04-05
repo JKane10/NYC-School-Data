@@ -1,6 +1,8 @@
 package com.jkane.a04042020_joshkane_nycschools.network.repositories
 
+import com.jkane.a04042020_joshkane_nycschools.BuildConfig
 import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool
+import com.jkane.a04042020_joshkane_nycschools.models.NYCSchoolSATScores
 import com.jkane.a04042020_joshkane_nycschools.network.api.NYCSchoolsAPI
 import com.jkane.a04042020_joshkane_nycschools.network.models.toDomainModel
 import io.reactivex.Observable
@@ -10,18 +12,16 @@ class NYCSchoolRepositoryImpl @Inject constructor(
         private val api: NYCSchoolsAPI
 ) : NYCSchoolsRepository {
     override fun getSchoolList(): Observable<List<NYCSchool>> =
-            // TODO move this to a buildconfig value
-            api.getResource("s3k6-pzi2").map { list ->
+            api.getResource(BuildConfig.SCHOOL_DIRECTORY_2017).map { list ->
                 list.map { school ->
                     school.toDomainModel()
                 }
             }
 
-    override fun getSchoolByDBN(dbn: String): Observable<List<NYCSchool>> =
-            // TODO move this to a buildconfig value
-            api.getResourceFilteredByDBN("f9bf-2cp4", dbn).map { list ->
+    override fun getSchoolByDBN(dbn: String): Observable<NYCSchoolSATScores> =
+            api.getResourceFilteredByDBN(BuildConfig.SAT_2012, dbn).map { list ->
                 list.map { school ->
                     school.toDomainModel()
-                }
+                }.first()
             }
 }

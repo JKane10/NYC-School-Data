@@ -3,14 +3,17 @@ package com.jkane.a04042020_joshkane_nycschools.app.dagger;
 import android.app.Application;
 
 import com.jkane.a04042020_joshkane_nycschools.MainActivity;
+import com.jkane.a04042020_joshkane_nycschools.app.utils.dagger.UtilModule;
 import com.jkane.a04042020_joshkane_nycschools.network.dagger.NetworkModule;
-import com.jkane.a04042020_joshkane_nycschools.ui.main.MainFragment;
+import com.jkane.a04042020_joshkane_nycschools.ui.schoollist.SchoolListFragment;
+import com.jkane.a04042020_joshkane_nycschools.ui.schooldetails.SchoolDetailsFragment;
 
 import dagger.Component;
 
 @Component(
         modules = {
-                NetworkModule.class
+                NetworkModule.class,
+                UtilModule.class
         }
 )
 public interface AppComponent {
@@ -18,5 +21,7 @@ public interface AppComponent {
 
     void inject(MainActivity mainActivity);
 
-    void inject(MainFragment mainFragment);
+    void inject(SchoolListFragment schoolListFragment);
+
+    void inject(SchoolDetailsFragment schoolDetailsFragment);
 }

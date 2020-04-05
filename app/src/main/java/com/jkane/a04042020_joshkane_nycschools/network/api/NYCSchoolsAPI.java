@@ -1,6 +1,7 @@
 package com.jkane.a04042020_joshkane_nycschools.network.api;
 
 import com.jkane.a04042020_joshkane_nycschools.network.models.NYCSchoolDataRow;
+import com.jkane.a04042020_joshkane_nycschools.network.models.NYCSchoolSATData;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public interface NYCSchoolsAPI {
     Observable<List<NYCSchoolDataRow>> getResource(@Path("resourceId") String id);
 
     @GET("resource/{resourceId}.json")
-    Observable<List<NYCSchoolDataRow>> getResourceFilteredByDBN(
+    Observable<List<NYCSchoolSATData>> getResourceFilteredByDBN(
             @Path("resourceId") String id,
             @Query("dbn") String dbn
     );

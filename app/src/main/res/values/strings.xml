@@ -1,5 +1,27 @@
 <resources>
     <string name="app_name">04042020-JoshKane-NYCSchools</string>
     <string name="user_error_msg">Sorry, something went wrong.</string>
+    <string name="no_sat_scores">Sorry, no SAT scores were found for this school.</string>
     <string name="description_format">Description: %s</string>
+    <string name="address">Address:</string>
+    <string name="phone">Phone:</string>
+    <string name="email">Email:</string>
+    <string name="contact_info">Contact Info</string>
+    <string name="sat_score_info">SAT Score Info</string>
+    <string name="number_of_tests">Number of tests:</string>
+    <string name="average_reading_score">Average reading score:</string>
+    <string name="average_math_score">Average math score:</string>
+    <string name="average_writing_score">Average writing score:</string>
+    <string name="data_not_available">Data not available</string>
+    <string name="school_overview">School Overview</string>
+    <string name="other_school_statistics">Other School Statistics</string>
+    <string name="attendance_rate">Attendance rate:</string>
+    <string name="website">Website:</string>
+    <string name="bus_routes">Bus routes:</string>
+    <string name="subways">Subways :</string>
+    <string name="transportation_info">Transportation Info</string>
+    <string name="hours_of_operation">Hours of operation:</string>
+    <string name="graduation_rate">Graduation rate:</string>
+    <string name="college_career_rate">College career rate:</string>
+    <string name="extracurriculars">Extracurriculars:</string>
 </resources>
