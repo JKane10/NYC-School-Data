@@ -3,6 +3,17 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+/**
+ * Load keystore - This is to keep keys out of source control.
+ * Keystore needs to have the following properties defined.
+ * GOOGLE_PLACES_API_KEY
+ *
+ * These keys can be obtained from https://cloud.google.com/maps-platform/
+ */
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
 android {
 
     viewBinding {
@@ -35,11 +46,21 @@ android {
             buildConfigField('String', 'BASE_URL', '"https://data.cityofnewyork.us/"')
             buildConfigField('String', 'SAT_2012', '"f9bf-2cp4"')
             buildConfigField('String', 'SCHOOL_DIRECTORY_2017', '"s3k6-pzi2"')
+            buildConfigField('Boolean', 'PLACES_API_ENABLED', 'false')
+            buildConfigField('String', 'PLACES_BASE_URL',
+                    '"https://maps.googleapis.com/maps/api/place/"')
+            buildConfigField 'String', "GOOGLE_PLACES_API_KEY",
+                    keystoreProperties.getProperty("GOOGLE_PLACES_API_KEY")
         }
         release {
             buildConfigField('String', 'BASE_URL', '"https://data.cityofnewyork.us/"')
             buildConfigField('String', 'SAT_2012', '"f9bf-2cp4"')
             buildConfigField('String', 'SCHOOL_DIRECTORY_2017', '"s3k6-pzi2"')
+            buildConfigField('Boolean', 'PLACES_API_ENABLED', 'false')
+            buildConfigField('String', 'PLACES_BASE_URL',
+                    '"https://maps.googleapis.com/maps/api/place/"')
+            buildConfigField 'String', "GOOGLE_PLACES_API_KEY",
+                    keystoreProperties.getProperty("GOOGLE_PLACES_API_KEY")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -79,6 +100,11 @@ dependencies {
     // https://github.com/google/dagger
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Glide dependencies for image loading
+    // https://github.com/bumptech/glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     // Testing dependencies
     testImplementation 'junit:junit:4.12'

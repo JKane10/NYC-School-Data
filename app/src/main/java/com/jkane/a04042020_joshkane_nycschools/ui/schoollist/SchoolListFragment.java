@@ -20,6 +20,7 @@ import com.jkane.a04042020_joshkane_nycschools.app.App;
 import com.jkane.a04042020_joshkane_nycschools.app.utils.StringUtils;
 import com.jkane.a04042020_joshkane_nycschools.databinding.SchoolListFragmentBinding;
 import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool;
+import com.jkane.a04042020_joshkane_nycschools.network.api.GooglePlacesAPI;
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRepository;
 
 import java.util.ArrayList;
@@ -41,6 +42,9 @@ public class SchoolListFragment extends Fragment {
 
     @Inject
     StringUtils stringUtils;
+
+    @Inject
+    GooglePlacesAPI photoAPI;
 
     public static SchoolListFragment newInstance() {
         return new SchoolListFragment();
@@ -71,12 +75,12 @@ public class SchoolListFragment extends Fragment {
     }
 
     private void setupRecyclerView(List<NYCSchool> list) {
-        adapter = new SchoolListRecyclerAdapter(list, stringUtils);
+        adapter = new SchoolListRecyclerAdapter(list, stringUtils, photoAPI);
         binding.schoolListRecycler.setHasFixedSize(true);
         binding.schoolListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.schoolListRecycler.setAdapter(adapter);
 
-        adapter = new SchoolListRecyclerAdapter(mViewModel.getSchools().getValue(), stringUtils);
+        adapter = new SchoolListRecyclerAdapter(mViewModel.getSchools().getValue(), stringUtils, photoAPI);
 
         adapter.setOnItemClickListener((position, v) -> {
             ((MainActivity) getActivity()).showSchoolDetails(adapter.list.get(position));
@@ -143,7 +147,7 @@ public class SchoolListFragment extends Fragment {
 
     private void setupFilter() {
         binding.clearSearchIcon.setOnClickListener(v -> {
-           binding.searchInput.setText("");
+            binding.searchInput.setText("");
         });
         binding.searchInput.addTextChangedListener(new TextWatcher() {
             @Override

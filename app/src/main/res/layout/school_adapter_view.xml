@@ -8,14 +8,26 @@
     android:paddingTop="@dimen/default_spacing"
     android:paddingEnd="@dimen/default_spacing">
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_spacing"
+        android:layout_marginEnd="@dimen/default_spacing"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/caret"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_spacing"
         android:textSize="@dimen/title_text_size"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="School name" />
 
@@ -35,8 +47,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
-        app:layout_constraintLeft_toRightOf="@+id/website_label"
-        app:layout_constraintRight_toLeftOf="@+id/caret"
+        android:layout_marginEnd="@dimen/default_spacing"
+        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@+id/website_label"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/website_label" />
 
@@ -55,8 +68,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
-        app:layout_constraintLeft_toRightOf="@+id/phone_label"
-        app:layout_constraintRight_toLeftOf="@+id/caret"
+        android:layout_marginEnd="@dimen/default_spacing"
+        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@+id/phone_label"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/phone_label" />
 
@@ -75,8 +89,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
-        app:layout_constraintLeft_toRightOf="@+id/email_label"
-        app:layout_constraintRight_toLeftOf="@+id/caret"
+        android:layout_marginEnd="@dimen/default_spacing"
+        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@+id/email_label"
         app:layout_constraintTop_toBottomOf="@+id/phone_label" />
 
     <!-- Address -->
@@ -94,8 +109,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
-        app:layout_constraintLeft_toRightOf="@+id/address_label"
-        app:layout_constraintRight_toLeftOf="@+id/caret"
+        android:layout_marginEnd="@dimen/default_spacing"
+        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintStart_toEndOf="@+id/address_label"
         app:layout_constraintTop_toTopOf="@+id/address_label" />
 
     <ImageView
