@@ -21,6 +21,7 @@ This application is powered by the NYC Open Data API. (https://opendata.cityofne
 * Retrofit - Network calls (https://square.github.io/retrofit/)
 * RxJava - Reactive functionality (http://reactivex.io/) or (https://github.com/ReactiveX/RxJava)
 * Chuck - HTTP inspection (debugging) (https://github.com/jgilfelt/chuck)
+* Glide - Image loading (https://github.com/bumptech/glide)
 * Dagger - Dependency injection (https://github.com/google/dagger)
 * Stetho - More debugging (https://github.com/facebook/stetho)
 * ktlint - Linting / code quality (https://ktlint.github.io/)
