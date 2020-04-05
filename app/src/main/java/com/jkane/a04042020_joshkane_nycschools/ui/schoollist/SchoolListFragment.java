@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * Fragment containing a list of Schools controlled by #[SchoolListRecyclerAdapter]
+ */
 public class SchoolListFragment extends Fragment {
 
     private SchoolListViewModel mViewModel;
@@ -61,6 +66,7 @@ public class SchoolListFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(SchoolListViewModel.class);
         setupRecyclerView(new ArrayList<>());
         setupObservers();
+        setupFilter();
         if (mViewModel.getSchools().getValue() == null) mViewModel.setInitialState(repo);
     }
 
@@ -80,7 +86,7 @@ public class SchoolListFragment extends Fragment {
     private void setupObservers() {
         observeLoading();
         observeError();
-        observeSchools();
+        observeFilteredSchools();
     }
 
     /**
@@ -120,8 +126,12 @@ public class SchoolListFragment extends Fragment {
         );
     }
 
-    private void observeSchools() {
-        mViewModel.getSchools().observe(
+    /**
+     * Observes a filtered school list in the viewmodel.
+     * Re-establishes the recyclerview when the list of filtered schools changes.
+     */
+    private void observeFilteredSchools() {
+        mViewModel.getFilteredSchools().observe(
                 getViewLifecycleOwner(),
                 schools -> {
                     if (!schools.isEmpty()) {
@@ -129,5 +139,27 @@ public class SchoolListFragment extends Fragment {
                     }
                 }
         );
+    }
+
+    private void setupFilter() {
+        binding.clearSearchIcon.setOnClickListener(v -> {
+           binding.searchInput.setText("");
+        });
+        binding.searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mViewModel.filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }

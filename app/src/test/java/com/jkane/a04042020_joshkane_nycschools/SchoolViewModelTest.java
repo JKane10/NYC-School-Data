@@ -35,8 +35,8 @@ public class SchoolViewModelTest {
     public void test_viewmodel_initial_state() {
         viewModel.setInitialState(null);
         assert (viewModel.getError().getValue() == null);
-        assert (viewModel.getFilters().getValue().isEmpty());
         assert (viewModel.getSchools().getValue().isEmpty());
+        assert (viewModel.getFilteredSchools().getValue().isEmpty());
         assert (!viewModel.isLoading().getValue());
     }
 
@@ -46,5 +46,14 @@ public class SchoolViewModelTest {
         assert (!viewModel.getSchools().getValue().isEmpty());
         assert (viewModel.getSchools().getValue().get(0).getId().equals(testNYCSchool.getId()));
         assert (viewModel.getSchools().getValue().get(0).getName().equals(testNYCSchool.getName()));
+    }
+
+    @Test
+    public void test_filtering_schools() {
+        viewModel.getSchools().postValue(testList);
+        viewModel.filter("Random Name");
+        assert (viewModel.getFilteredSchools().getValue().isEmpty());
+        viewModel.filter(testNYCSchool.getName());
+        assert (!viewModel.getFilteredSchools().getValue().isEmpty());
     }
 }

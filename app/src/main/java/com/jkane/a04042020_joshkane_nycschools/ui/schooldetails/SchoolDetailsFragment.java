@@ -19,6 +19,9 @@ import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRe
 
 import javax.inject.Inject;
 
+/**
+ * Fragment that contains school details.
+ */
 public class SchoolDetailsFragment extends Fragment {
 
     public static String SCHOOL_KEY = "SCHOOL_KEY";
@@ -27,10 +30,10 @@ public class SchoolDetailsFragment extends Fragment {
     private NYCSchool school;
 
     @Inject
-    protected NYCSchoolsRepository repo;
+    NYCSchoolsRepository repo;
 
     @Inject
-    protected StringUtils stringUtil;
+    StringUtils stringUtil;
 
     public static SchoolDetailsFragment newInstance() {
         return new SchoolDetailsFragment();

@@ -7,6 +7,7 @@ import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool
 import com.jkane.a04042020_joshkane_nycschools.network.observers.NetworkObserver
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRepository
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 /**
  * Contains logic for maintaining and filtering schools data and acts as view state.
@@ -21,8 +22,8 @@ class SchoolListViewModel() : ViewModel() {
     private var repo: NYCSchoolsRepository? = null
 
     val isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
-    val filters: MutableLiveData<MutableMap<String, String>> by lazy { MutableLiveData<MutableMap<String, String>>() }
     val schools: MutableLiveData<List<NYCSchool>> by lazy { MutableLiveData<List<NYCSchool>>() }
+    val filteredSchools: MutableLiveData<List<NYCSchool>> by lazy { MutableLiveData<List<NYCSchool>>() }
     val error: MutableLiveData<Int> by lazy { MutableLiveData<Int>() }
 
     /**
@@ -33,21 +34,37 @@ class SchoolListViewModel() : ViewModel() {
     fun setInitialState(nycSchoolRepo: NYCSchoolsRepository?) {
         repo = nycSchoolRepo
         isLoading.value = false
-        filters.value = mutableMapOf()
         schools.value = listOf()
+        filteredSchools.value = listOf()
         if (repo != null) loadSchools()
     }
 
+    /**
+     * Loads schools from the repository and sets loading state correctly.
+     */
     private fun loadSchools() {
         if (isLoading.value == false) {
             isLoading.postValue(true)
             repo?.schoolList?.subscribeOn(Schedulers.io())?.doOnNext {
                 schools.postValue(it)
+                filteredSchools.postValue(it)
             }?.doOnError {
                 error.postValue(R.string.user_error_msg)
             }?.doFinally {
                 isLoading.postValue(false)
             }?.subscribe(NetworkObserver())
         }
+    }
+
+    /**
+     * Filters source list of schools based on filter input and updates observed filtered list
+     * of schools.
+     */
+    fun filter(filter: String) {
+        filteredSchools.postValue(schools.value?.filter {
+            it.name?.toLowerCase(Locale.getDefault())?.contains(
+                    filter.toLowerCase(Locale.getDefault())
+            ) ?: true
+        })
     }
 }
