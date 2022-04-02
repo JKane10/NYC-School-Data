@@ -27,7 +27,6 @@ public class SchoolDetailsFragment extends Fragment {
     public static String SCHOOL_KEY = "SCHOOL_KEY";
     private SchoolDetailsViewModel mViewModel;
     private SchoolDetailsFragmentBinding binding;
-    private NYCSchool school;
 
     @Inject
     NYCSchoolsRepository repo;
@@ -42,14 +41,14 @@ public class SchoolDetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        ((App) requireActivity().getApplication()).getAppComponent().inject(this);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = SchoolDetailsFragmentBinding.inflate(inflater, container, false);
-        school = getArguments().getParcelable(SCHOOL_KEY);
+        NYCSchool school = requireArguments().getParcelable(SCHOOL_KEY);
 
         mViewModel = ViewModelProviders.of(this).get(SchoolDetailsViewModel.class);
         setupObservers();
@@ -114,7 +113,7 @@ public class SchoolDetailsFragment extends Fragment {
     private void observeLoading() {
         mViewModel.isLoading().observe(
                 getViewLifecycleOwner(),
-                isLoading -> ((MainActivity) getActivity()).showLoading(isLoading)
+                isLoading -> ((MainActivity) requireActivity()).showLoading(isLoading)
         );
     }
 
@@ -133,7 +132,7 @@ public class SchoolDetailsFragment extends Fragment {
     private void observeError() {
         mViewModel.getError().observe(
                 getViewLifecycleOwner(),
-                error -> ((MainActivity) getActivity()).showError(getString(error))
+                error -> ((MainActivity) requireActivity()).showError(getString(error))
         );
     }
 }

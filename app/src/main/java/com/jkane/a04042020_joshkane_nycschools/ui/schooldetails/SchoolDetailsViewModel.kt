@@ -2,12 +2,13 @@ package com.jkane.a04042020_joshkane_nycschools.ui.schooldetails
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.jkane.a04042020_joshkane_nycschools.R
 import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool
 import com.jkane.a04042020_joshkane_nycschools.models.NYCSchoolSATScores
-import com.jkane.a04042020_joshkane_nycschools.network.observers.NetworkObserver
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRepository
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 internal class SchoolDetailsViewModel : ViewModel() {
 
@@ -36,15 +37,16 @@ internal class SchoolDetailsViewModel : ViewModel() {
     private fun loadSchools() {
         if (isLoading.value == false) {
             isLoading.postValue(true)
-            repo?.getSchoolByDBN(school.value?.id)
-                    ?.subscribeOn(Schedulers.io())?.doOnNext {
-                        schoolScores.postValue(it)
-                    }?.doOnError {
-                        schoolScores.postValue(NYCSchoolSATScores())
+            viewModelScope.launch(Dispatchers.IO) {
+                school.value?.id?.let { schoolId ->
+                    try {
+                        schoolScores.postValue(repo?.getSATScoresByDBN(schoolId))
+                    } catch (exception: Exception) {
                         error.postValue(R.string.no_sat_scores)
-                    }?.doFinally {
-                        isLoading.postValue(false)
-                    }?.subscribe(NetworkObserver())
+                    }
+                    isLoading.postValue(false)
+                }
+            }
         }
     }
 }

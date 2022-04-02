@@ -19,12 +19,8 @@ import com.jkane.a04042020_joshkane_nycschools.MainActivity;
 import com.jkane.a04042020_joshkane_nycschools.app.App;
 import com.jkane.a04042020_joshkane_nycschools.app.utils.StringUtils;
 import com.jkane.a04042020_joshkane_nycschools.databinding.SchoolListFragmentBinding;
-import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool;
 import com.jkane.a04042020_joshkane_nycschools.network.api.GooglePlacesAPI;
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -53,7 +49,7 @@ public class SchoolListFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        ((App) getActivity().getApplication()).getAppComponent().inject(this);
+        ((App) requireActivity().getApplication()).getAppComponent().inject(this);
     }
 
     @Nullable
@@ -104,7 +100,7 @@ public class SchoolListFragment extends Fragment {
         mViewModel.isLoading().observe(
                 getViewLifecycleOwner(),
                 isLoading -> {
-                    ((MainActivity) getActivity()).showLoading(isLoading);
+                    ((MainActivity) requireActivity()).showLoading(isLoading);
                 }
         );
     }
@@ -124,7 +120,7 @@ public class SchoolListFragment extends Fragment {
     private void observeError() {
         mViewModel.getError().observe(
                 getViewLifecycleOwner(),
-                error -> ((MainActivity) getActivity()).showError(getString(error))
+                error -> ((MainActivity) requireActivity()).showError(getString(error))
         );
     }
 
@@ -135,11 +131,7 @@ public class SchoolListFragment extends Fragment {
     private void observeFilteredSchools() {
         mViewModel.getFilteredSchools().observe(
                 getViewLifecycleOwner(),
-                schools -> {
-                    if (!schools.isEmpty()) {
-                        adapter.updateData(schools);
-                    }
-                }
+                schools -> adapter.updateData(schools)
         );
     }
 

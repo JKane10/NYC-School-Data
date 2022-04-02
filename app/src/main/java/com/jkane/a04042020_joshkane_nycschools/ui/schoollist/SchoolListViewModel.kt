@@ -2,12 +2,13 @@ package com.jkane.a04042020_joshkane_nycschools.ui.schoollist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.jkane.a04042020_joshkane_nycschools.R
 import com.jkane.a04042020_joshkane_nycschools.models.NYCSchool
-import com.jkane.a04042020_joshkane_nycschools.network.observers.NetworkObserver
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRepository
-import io.reactivex.schedulers.Schedulers
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.util.Locale
 
 /**
  * Contains logic for maintaining and filtering schools data and acts as view state.
@@ -18,7 +19,7 @@ import java.util.*
  * schools - LiveData wrapper around list of school object.
  * error - maintains error state for UI.
  */
-class SchoolListViewModel() : ViewModel() {
+class SchoolListViewModel : ViewModel() {
     private var repo: NYCSchoolsRepository? = null
 
     val isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
@@ -45,14 +46,17 @@ class SchoolListViewModel() : ViewModel() {
     private fun loadSchools() {
         if (isLoading.value == false) {
             isLoading.postValue(true)
-            repo?.schoolList?.subscribeOn(Schedulers.io())?.doOnNext {
-                schools.postValue(it)
-                filteredSchools.postValue(it)
-            }?.doOnError {
-                error.postValue(R.string.user_error_msg)
-            }?.doFinally {
+            viewModelScope.launch(Dispatchers.IO) {
+                try {
+                    repo?.getSchoolList().let {
+                        schools.postValue(it)
+                        filteredSchools.postValue(it)
+                    }
+                } catch (exception: Exception) {
+                    error.postValue(R.string.user_error_msg)
+                }
                 isLoading.postValue(false)
-            }?.subscribe(NetworkObserver())
+            }
         }
     }
 
@@ -62,9 +66,9 @@ class SchoolListViewModel() : ViewModel() {
      */
     fun filter(filter: String) {
         filteredSchools.postValue(schools.value?.filter {
-            it.name?.toLowerCase(Locale.getDefault())?.contains(
-                    filter.toLowerCase(Locale.getDefault())
-            ) ?: true
+            it.name?.lowercase(Locale.getDefault())?.contains(
+                filter.lowercase(Locale.getDefault())
+            ) ?: false
         })
     }
 }

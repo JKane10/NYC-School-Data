@@ -45,14 +45,13 @@ public class NetworkModule {
 
         GsonConverterFactory gsonFactory = GsonConverterFactory.create(
                 new GsonBuilder().setFieldNamingPolicy(
-                        // maps json key of format'some_field_name' to java value 'someFieldName'
+                        // maps json key of format 'some_field_name' to java value 'someFieldName'
                         FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES
                 ).create());
 
         return new Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(gsonFactory)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
                 .build()
                 .create(NYCSchoolsAPI.class);
@@ -67,7 +66,7 @@ public class NetworkModule {
 
         GsonConverterFactory gsonFactory = GsonConverterFactory.create(
                 new GsonBuilder().setFieldNamingPolicy(
-                        // maps json key of format'some_field_name' to java value 'someFieldName'
+                        // maps json key of format 'some_field_name' to java value 'someFieldName'
                         FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES
                 ).create());
 
