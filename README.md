@@ -17,7 +17,7 @@ as the [Google Places API](https://developers.google.com/maps/documentation/plac
 5. To view more traditional implementation (RecyclerView) you can also set 'COMPOSE_VIEW' to false in the build config.
 4. Run the project.
 
-![alt text](NYC_School_Viewer_App.png)
+![Architecture Diagram](NYC_School_Viewer_App.png)
 
 ### Libraries / Dependencies used
 * Retrofit - Network calls (https://square.github.io/retrofit/)
@@ -36,9 +36,21 @@ as the [Google Places API](https://developers.google.com/maps/documentation/plac
 * Google Places -https://cloud.google.com/maps-platform/places
 * NYC Open Data API - https://opendata.cityofnewyork.us/
 
+### 2022 Update
+* Updates original list view to display the image better
+* Migrates some rxjava network calls to using coroutines
+* Migrated the google places API call to a repo rather than doing directly in the adapter
+* Added a flag and rebuilt the school list in compose behind that flag
+* Added some unit and instrumentation tests
+* Migrated more java code to Kotlin and updated dependencies
+
 ### Future improvements list
-- Write instrumentation testing.
+- Write more unit and instrumentation testing especially around jetpack compose.
 - Implement simple caching for offline usage.
 
-### GIF
-![alt_test](NYC_Schools_List.gif)
+### GIFs
+#### With RecyclerView (`COMPOSE_VIEW = false`)
+![Recording with RecyclerView](NYC_Schools_List_RecyclerView.gif)
+
+#### Compose (`COMPOSE_VIEW = true`)
+![Recording using compose](NYC_Schools_List_Compose.gif)

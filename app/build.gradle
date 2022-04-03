@@ -23,8 +23,8 @@ android {
     }
 
     compileOptions {
-        targetCompatibility = "8"
-        sourceCompatibility = "8"
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
@@ -56,7 +56,7 @@ android {
             buildConfigField('String', 'SAT_2012', '"f9bf-2cp4"')
             buildConfigField('String', 'SCHOOL_DIRECTORY_2017', '"s3k6-pzi2"')
             buildConfigField('Boolean', 'PLACES_API_ENABLED', 'true')
-            buildConfigField('Boolean', 'COMPOSE_VIEW', 'false')
+            buildConfigField('Boolean', 'COMPOSE_VIEW', 'true')
             buildConfigField('String', 'PLACES_BASE_URL',
                     '"https://maps.googleapis.com/maps/api/place/"')
             buildConfigField 'String', "GOOGLE_PLACES_API_KEY",
@@ -147,4 +147,10 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.1.1'
     // When using a AppCompat theme
     implementation "com.google.accompanist:accompanist-appcompat-theme:0.16.0"
+
+    // For Java
+    implementation 'androidx.work:work-runtime:2.7.1'
+
+    // For Kotlin
+    implementation 'androidx.work:work-runtime-ktx:2.7.1'
 }

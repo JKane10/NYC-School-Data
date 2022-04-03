@@ -5,6 +5,13 @@ import com.jkane.a20220402_joshkane_nycschools.models.NYCSchoolSATScores
 import com.jkane.a20220402_joshkane_nycschools.network.api.NYCSchoolsAPI
 import javax.inject.Inject
 
+
+/**
+ * Having UI tests rely on network requests can cause flaky UI tests due to network instability.
+ *
+ * This adds a androidTest variant of the repository that just spits back a hard coded list of
+ * schools for testing purposes.
+ */
 class NYCSchoolRepositoryImpl @Inject constructor(
     private val api: NYCSchoolsAPI
 ) : NYCSchoolsRepository {

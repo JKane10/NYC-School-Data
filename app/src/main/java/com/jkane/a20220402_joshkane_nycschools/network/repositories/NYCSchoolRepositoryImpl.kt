@@ -11,10 +11,11 @@ class NYCSchoolRepositoryImpl @Inject constructor(
     private val api: NYCSchoolsAPI
 ) : NYCSchoolsRepository {
     override suspend fun getSchoolList(): List<NYCSchool> =
-        api.getResource(BuildConfig.SCHOOL_DIRECTORY_2017).body()!!.map { school ->
+        api.getResource(BuildConfig.SCHOOL_DIRECTORY_2017).body()?.map { school ->
             school.toDomainModel()
-        }
+        } ?: emptyList()
 
     override suspend fun getSATScoresByDBN(dbn: String): NYCSchoolSATScores =
-        api.getResourceFilteredByDBN(BuildConfig.SAT_2012, dbn).body()!!.first().toDomainModel()
+        api.getResourceFilteredByDBN(BuildConfig.SAT_2012, dbn).body()?.first()?.toDomainModel()
+            ?: NYCSchoolSATScores()
 }

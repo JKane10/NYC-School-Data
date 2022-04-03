@@ -86,11 +86,11 @@ class SchoolListViewModel : ViewModel() {
                 filter.lowercase(Locale.getDefault())
             ) ?: false
         })
-        filteredSchoolsState = schools.value!!.filter {
+        filteredSchoolsState = schools.value?.filter {
             it.name?.lowercase(Locale.getDefault())?.contains(
                 filter.lowercase(Locale.getDefault())
             ) ?: false
-        }
+        } ?: emptyList()
     }
 
     //just a stand alone map might be more performant
@@ -98,7 +98,7 @@ class SchoolListViewModel : ViewModel() {
     fun getImageUrlFromSchool(school: NYCSchool) {
         school.location?.let {
             placesRepo?.getImageUrlFromSchoolAddress(school.location)?.doOnSuccess {
-                schoolImageUrlMap[school] = it?:""
+                schoolImageUrlMap[school] = it ?: ""
             }?.subscribe()
         }
     }

@@ -157,12 +157,8 @@ class SchoolListFragment : Fragment() {
     private fun observeError() {
         mViewModel.error.observe(
             viewLifecycleOwner
-        ) { error: Int? ->
-            (requireActivity() as SchoolActivity).showError(
-                getString(
-                    error!!
-                )
-            )
+        ) { error: Int ->
+            (requireActivity() as SchoolActivity).showError(getString(error))
         }
     }
 
@@ -227,9 +223,6 @@ class SchoolListFragment : Fragment() {
 
     /**
      * Composable Card that displays the School's name and details.
-     *
-     *
-     *
      * @param school - The school that is being displayed.
      */
     @Composable

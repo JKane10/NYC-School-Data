@@ -30,7 +30,6 @@ class SchoolListFragmentText {
     fun verify_tapping_a_school_navigates_to_details() {
         schoolList {
             tapFirstSchool()
-            Thread.sleep(5000)
         }
     }
 }
