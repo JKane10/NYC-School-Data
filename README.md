@@ -49,8 +49,7 @@ as the [Google Places API](https://developers.google.com/maps/documentation/plac
 - Implement simple caching for offline usage.
 
 ### GIFs
-#### With RecyclerView (`COMPOSE_VIEW = false`)
-![Recording with RecyclerView](NYC_Schools_List_RecyclerView.gif)
 
-#### Compose (`COMPOSE_VIEW = true`)
-![Recording using compose](NYC_Schools_List_Compose.gif)
+| With RecyclerView (`COMPOSE_VIEW = false`) | Compose (`COMPOSE_VIEW = true`) |
+|------------------------------------------- | --------------------------------|
+| <img src="nyc_schools_recycler.gif" alt="Recording with RecyclerView" height="600"> | <img src="nyc_schools_compose.gif" alt="Recording using compose" height="600"> |
