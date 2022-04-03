@@ -10,7 +10,7 @@ class GooglePlacesRepoImpl @Inject constructor(
     val api: GooglePlacesAPI
 ) : GooglePlacesRepository {
 
-    override fun getImageUrlFromSchoolAddress(address: String): Single<String?> {
+    override fun getImageUrlFromSchoolAddress(address: String?): Single<String?> {
         return api.getPlaceFromText("\"" + address + "\"")
             .subscribeOn(Schedulers.io())
             .flatMap { googlePlaceResponse ->
@@ -29,6 +29,6 @@ class GooglePlacesRepoImpl @Inject constructor(
                 } else {
                     Single.just("")
                 }
-            }
+            }.onErrorReturn { null }
     }
 }

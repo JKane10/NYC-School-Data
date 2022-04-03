@@ -15,26 +15,30 @@ import com.jkane.a20220402_joshkane_nycschools.R;
 import com.jkane.a20220402_joshkane_nycschools.app.utils.StringUtils;
 import com.jkane.a20220402_joshkane_nycschools.databinding.SchoolAdapterViewBinding;
 import com.jkane.a20220402_joshkane_nycschools.models.NYCSchool;
-import com.jkane.a20220402_joshkane_nycschools.network.api.GooglePlacesAPI;
+import com.jkane.a20220402_joshkane_nycschools.network.repositories.GooglePlacesRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRecyclerAdapter.SchoolViewHolder> {
 
     List<NYCSchool> list;
     private static SchoolListClickListener listener;
-    private final GooglePlacesAPI photoAPI;
+
+    GooglePlacesRepository placesRepo;
 
     public StringUtils stringUtils;
 
-    public SchoolListRecyclerAdapter(List<NYCSchool> list, StringUtils stringUtils, GooglePlacesAPI photoAPI) {
+    public SchoolListRecyclerAdapter(
+            List<NYCSchool> list,
+            StringUtils stringUtils,
+            GooglePlacesRepository placesRepo
+    ) {
         this.list = list == null ? new ArrayList<>() : list;
         this.stringUtils = stringUtils;
-        this.photoAPI = photoAPI;
+        this.placesRepo = placesRepo;
     }
 
     @NonNull
@@ -102,41 +106,29 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
          * This should probably be moved out to a separate utility class though and called from
          * here. Hardcoded the url params to save some time.
          *
-         * @param schoolName Name of the school to be used for a Google Place Query.
+         * @param schoolLocation Location of the school to be used for a Google Place Query.
          */
-        private void loadImage(String schoolName) {
+        private void loadImage(String schoolLocation) {
             Glide.with(binding.getRoot()).load(R.drawable.ic_refresh_24px).into(binding.image);
-            photoAPI.getPlaceFromText("\"" + schoolName + "\"")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSuccess(googlePlaceResponse -> {
-                        String photoUrl = null;
-                        if (!googlePlaceResponse.candidates.isEmpty() &&
-                                googlePlaceResponse.candidates.get(0).photos != null &&
-                                !googlePlaceResponse.candidates.get(0).photos.isEmpty()
-                        ) {
-                            String photoReference = googlePlaceResponse.candidates.get(0).photos
-                                    .get(0).photoReference;
-                            photoUrl = BuildConfig.PLACES_BASE_URL + "photo?key=" +
-                                    BuildConfig.GOOGLE_PLACES_API_KEY +
-                                    "&maxheight=500&maxwidth=500&photoreference=" + photoReference;
-                        }
-                        binding.image.setVisibility(View.VISIBLE);
-                        Glide
-                                .with(binding.getRoot())
-                                .load(photoUrl)
-                                .override(200, 200)
-                                .placeholder(R.drawable.ic_refresh_24px)
-                                .error(R.drawable.ic_broken_image_24px)
-                                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .into(binding.image);
-                    })
-                    .doOnError(error -> {
-                        Log.e(
-                                getClass().getName(),
-                                "loadImage - Failed to load image: " + error.toString()
-                        );
-                    }).subscribe();
+            if (placesRepo != null && schoolLocation != null) {
+                placesRepo.getImageUrlFromSchoolAddress(schoolLocation)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSuccess(photoUrl -> {
+                            if (photoUrl != null) {
+                                binding.image.setVisibility(View.VISIBLE);
+                                Glide.with(binding.getRoot())
+                                        .load(photoUrl)
+                                        .override(200, 200)
+                                        .placeholder(R.drawable.ic_refresh_24px)
+                                        .error(R.drawable.ic_broken_image_24px)
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                        .into(binding.image);
+                            }
+                        }).doOnError(error -> Log.e(
+                        getClass().getName(),
+                        "loadImage - Failed to load image: " + error.toString()
+                )).subscribe();
+            }
         }
 
         @Override

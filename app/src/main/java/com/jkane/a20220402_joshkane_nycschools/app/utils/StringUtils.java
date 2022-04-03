@@ -27,6 +27,12 @@ public class StringUtils {
         return (value != null) ? value : context.getString(R.string.data_not_available);
     }
 
+    /**
+     * Utility to strip the long lat values in parenthesis from the location string to isolate the
+     * address for displaying on the screen
+     * @param value to be checked
+     * @return value as a string or the nont available string from resources.
+     */
     public String addressOrUnavailable(String value) {
         String result;
         try {

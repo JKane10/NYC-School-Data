@@ -110,7 +110,7 @@ class SchoolListFragment : Fragment() {
         adapter = SchoolListRecyclerAdapter(
             mViewModel.filteredSchools.value,
             stringUtils,
-            photoAPI
+            placesRepo
         )
         binding.schoolListRecycler.setHasFixedSize(true)
         binding.schoolListRecycler.layoutManager = LinearLayoutManager(context)

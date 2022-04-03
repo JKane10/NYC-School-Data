@@ -11,6 +11,7 @@ buildscript {
     ext.glide_version = '4.11.0'
     ext.stetho_version = '1.5.1'
     ext.epoxy_version = '3.9.0'
+    ext.mockk_version = "1.12.3"
     repositories {
         google()
         mavenCentral()
