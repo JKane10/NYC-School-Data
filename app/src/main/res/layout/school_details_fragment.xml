@@ -10,15 +10,26 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/default_spacing">
 
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/name"
+            android:contentDescription="School Image" />
+
         <TextView
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/header_text_size"
             android:textStyle="bold"
+            android:layout_marginTop="@dimen/default_spacing"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image"
             tools:text="School name" />
 
         <!-- Contact Info Section -->
@@ -60,7 +71,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_spacing"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/caret"
             app:layout_constraintStart_toEndOf="@+id/hours_label"
             app:layout_constraintTop_toTopOf="@+id/hours_label" />
 
@@ -81,7 +91,6 @@
             android:layout_marginStart="@dimen/default_spacing"
             android:autoLink="web"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/caret"
             app:layout_constraintStart_toEndOf="@+id/website_label"
             app:layout_constraintTop_toBottomOf="@+id/name"
             app:layout_constraintTop_toTopOf="@+id/website_label" />
@@ -103,7 +112,6 @@
             android:layout_marginStart="@dimen/default_spacing"
             android:autoLink="phone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/caret"
             app:layout_constraintStart_toEndOf="@+id/phone_label"
             app:layout_constraintTop_toBottomOf="@+id/name"
             app:layout_constraintTop_toTopOf="@+id/phone_label" />
@@ -125,7 +133,6 @@
             android:layout_marginStart="@dimen/default_spacing"
             android:autoLink="email"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/caret"
             app:layout_constraintStart_toEndOf="@+id/email_label"
             app:layout_constraintTop_toBottomOf="@+id/phone_label" />
 

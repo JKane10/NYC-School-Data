@@ -10,24 +10,22 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_spacing"
-        android:layout_marginEnd="@dimen/default_spacing"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/caret"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/name" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_spacing"
         android:layout_marginEnd="@dimen/default_spacing"
         android:textSize="@dimen/title_text_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/image"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/caret"
+        app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="School name" />
 
@@ -40,6 +38,7 @@
         android:text="@string/website"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <TextView
@@ -48,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
         android:layout_marginEnd="@dimen/default_spacing"
-        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintEnd_toStartOf="@id/caret"
         app:layout_constraintStart_toEndOf="@+id/website_label"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/website_label" />
@@ -61,6 +60,8 @@
         android:text="@string/phone"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/website" />
 
     <TextView
@@ -69,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
         android:layout_marginEnd="@dimen/default_spacing"
-        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintEnd_toStartOf="@id/caret"
         app:layout_constraintStart_toEndOf="@+id/phone_label"
         app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/phone_label" />
@@ -82,6 +83,7 @@
         android:text="@string/email"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/phone_label" />
 
     <TextView
@@ -90,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
         android:layout_marginEnd="@dimen/default_spacing"
-        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintEnd_toStartOf="@id/caret"
         app:layout_constraintStart_toEndOf="@+id/email_label"
         app:layout_constraintTop_toBottomOf="@+id/phone_label" />
 
@@ -102,6 +104,7 @@
         android:text="@string/address"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <TextView
@@ -110,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/default_spacing"
         android:layout_marginEnd="@dimen/default_spacing"
-        app:layout_constraintEnd_toStartOf="@+id/image"
+        app:layout_constraintEnd_toStartOf="@id/caret"
         app:layout_constraintStart_toEndOf="@+id/address_label"
         app:layout_constraintTop_toTopOf="@+id/address_label" />
 

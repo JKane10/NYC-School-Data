@@ -7,6 +7,8 @@ import com.google.gson.GsonBuilder;
 import com.jkane.a04042020_joshkane_nycschools.BuildConfig;
 import com.jkane.a04042020_joshkane_nycschools.network.api.GooglePlacesAPI;
 import com.jkane.a04042020_joshkane_nycschools.network.api.NYCSchoolsAPI;
+import com.jkane.a04042020_joshkane_nycschools.network.repositories.GooglePlacesRepoImpl;
+import com.jkane.a04042020_joshkane_nycschools.network.repositories.GooglePlacesRepository;
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolRepositoryImpl;
 import com.jkane.a04042020_joshkane_nycschools.network.repositories.NYCSchoolsRepository;
 import com.readystatesoftware.chuck.ChuckInterceptor;
@@ -34,6 +36,11 @@ public class NetworkModule {
 
     @Provides
     public NYCSchoolsRepository providesNYCSchoolsRepository(NYCSchoolRepositoryImpl repo) {
+        return repo;
+    }
+
+    @Provides
+    public GooglePlacesRepository providesGooglePlacesRepository(GooglePlacesRepoImpl repo) {
         return repo;
     }
 

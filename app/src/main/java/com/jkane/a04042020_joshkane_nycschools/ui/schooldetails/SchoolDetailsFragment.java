@@ -10,7 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.jkane.a04042020_joshkane_nycschools.MainActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.jkane.a04042020_joshkane_nycschools.SchoolActivity;
 import com.jkane.a04042020_joshkane_nycschools.app.App;
 import com.jkane.a04042020_joshkane_nycschools.app.utils.StringUtils;
 import com.jkane.a04042020_joshkane_nycschools.databinding.SchoolDetailsFragmentBinding;
@@ -25,6 +27,7 @@ import javax.inject.Inject;
 public class SchoolDetailsFragment extends Fragment {
 
     public static String SCHOOL_KEY = "SCHOOL_KEY";
+    public static String IMAGE_KEY = "IMAGE_KEY";
     private SchoolDetailsViewModel mViewModel;
     private SchoolDetailsFragmentBinding binding;
 
@@ -49,6 +52,13 @@ public class SchoolDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = SchoolDetailsFragmentBinding.inflate(inflater, container, false);
         NYCSchool school = requireArguments().getParcelable(SCHOOL_KEY);
+        String imageUrl = requireArguments().getString(IMAGE_KEY);
+        if (imageUrl != null && !imageUrl.isEmpty()) {
+            Glide.with(binding.getRoot())
+                    .load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.image);
+        }
 
         mViewModel = ViewModelProviders.of(this).get(SchoolDetailsViewModel.class);
         setupObservers();
@@ -113,7 +123,7 @@ public class SchoolDetailsFragment extends Fragment {
     private void observeLoading() {
         mViewModel.isLoading().observe(
                 getViewLifecycleOwner(),
-                isLoading -> ((MainActivity) requireActivity()).showLoading(isLoading)
+                isLoading -> ((SchoolActivity) requireActivity()).showLoading(isLoading)
         );
     }
 
@@ -132,7 +142,7 @@ public class SchoolDetailsFragment extends Fragment {
     private void observeError() {
         mViewModel.getError().observe(
                 getViewLifecycleOwner(),
-                error -> ((MainActivity) requireActivity()).showError(getString(error))
+                error -> ((SchoolActivity) requireActivity()).showError(getString(error))
         );
     }
 }

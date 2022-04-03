@@ -29,7 +29,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
 
     List<NYCSchool> list;
     private static SchoolListClickListener listener;
-    private GooglePlacesAPI photoAPI;
+    private final GooglePlacesAPI photoAPI;
 
     public StringUtils stringUtils;
 
@@ -61,7 +61,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
     public void updateData(List<NYCSchool> newList) {
         list.clear();
         list.addAll(newList);
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // For a real production app - would write a proper diff util
     }
 
     public void setOnItemClickListener(SchoolListClickListener listener) {
@@ -90,7 +90,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
             binding.phone.setText(stringUtils.valueOrUnavailable(school.getPhoneNumber()));
             binding.email.setText(stringUtils.valueOrUnavailable(school.getEmail()));
 
-            if (BuildConfig.PLACES_API_ENABLED) loadImage(school.getName());
+            if (BuildConfig.PLACES_API_ENABLED) loadImage(school.getLocation());
         }
 
         /**
@@ -107,11 +107,11 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
          * @param schoolName Name of the school to be used for a Google Place Query.
          */
         private void loadImage(String schoolName) {
-
+            Glide.with(binding.getRoot()).load(R.drawable.ic_refresh_24px).into(binding.image);
             photoAPI.getPlaceFromText("\"" + schoolName + "\"")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnNext(googlePlaceResponse -> {
+                    .doOnSuccess(googlePlaceResponse -> {
                         String photoUrl = null;
                         if (!googlePlaceResponse.candidates.isEmpty() &&
                                 googlePlaceResponse.candidates.get(0).photos != null &&
@@ -121,7 +121,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
                                     .get(0).photoReference;
                             photoUrl = BuildConfig.PLACES_BASE_URL + "photo?key=" +
                                     BuildConfig.GOOGLE_PLACES_API_KEY +
-                                    "&maxheight=100&maxwidth=100&photoreference=" + photoReference;
+                                    "&maxheight=500&maxwidth=500&photoreference=" + photoReference;
                         }
                         binding.image.setVisibility(View.VISIBLE);
                         Glide
@@ -138,8 +138,7 @@ public class SchoolListRecyclerAdapter extends RecyclerView.Adapter<SchoolListRe
                                 getClass().getName(),
                                 "loadImage - Failed to load image: " + error.toString()
                         );
-                    })
-                    .subscribe(new NetworkObserver());
+                    }).subscribe();
         }
 
         @Override

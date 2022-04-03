@@ -14,25 +14,7 @@ class NYCSchoolRepositoryImpl @Inject constructor(
         api.getResource(BuildConfig.SCHOOL_DIRECTORY_2017).body()!!.map { school ->
             school.toDomainModel()
         }
-//    {
-//        val response = api.getResource(BuildConfig.SCHOOL_DIRECTORY_2017)
-//        if (!response.isSuccessful && response.body().isNullOrEmpty()) {
-//            throw Exception()
-//        }
-//        return response.body()!!.map { school ->
-//            school.toDomainModel()
-//        }
-//    }
 
     override suspend fun getSATScoresByDBN(dbn: String): NYCSchoolSATScores =
         api.getResourceFilteredByDBN(BuildConfig.SAT_2012, dbn).body()!!.first().toDomainModel()
-
-//    {
-//        val response = api.getResourceFilteredByDBN(BuildConfig.SAT_2012, dbn)
-//        if (!response.isSuccessful && response.body().isNullOrEmpty()) {
-//            throw Exception()
-//        } else {
-//            return response.body()!!.first().toDomainModel()
-//        }
-//    }
 }

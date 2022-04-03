@@ -1,7 +1,7 @@
 package com.jkane.a04042020_joshkane_nycschools.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * Domain object to drive a layer of separation between application and network.

@@ -8,11 +8,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class SchoolActivityTest {
 
     @Rule
     public final ActivityTestRule getRule() {
-        return new ActivityTestRule(MainActivity.class);
+        return new ActivityTestRule(SchoolActivity.class);
     }
 
     @Test
