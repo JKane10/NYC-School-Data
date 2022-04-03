@@ -38,7 +38,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        applicationId "com.jkane.a04042020_joshkane_nycschools"
+        applicationId "com.jkane.a20220402_joshkane_nycschools"
         minSdkVersion 21
         targetSdkVersion 32
         versionCode 1

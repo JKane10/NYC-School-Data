@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jkane.a04042020_joshkane_nycschools">
+    package="com.jkane.a20220402_joshkane_nycschools">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".app.App"
+        android:name="com.jkane.a20220402_joshkane_nycschools.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SchoolActivity"
+            android:name="com.jkane.a20220402_joshkane_nycschools.SchoolActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

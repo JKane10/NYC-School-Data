@@ -5,7 +5,8 @@ This repository contains a simple, single activity two fragment native MVVM Andr
 written in both Kotlin and Java.
 The first fragment contains a list of NYC Schools
 The second fragment gives more detailed information on the school you select from the list.
-This application is powered by the NYC Open Data API. (https://opendata.cityofnewyork.us/)
+This application is powered by the [NYC Open Data API](https://opendata.cityofnewyork.us/) as well
+as the [Google Places API](https://developers.google.com/maps/documentation/places/web-service/overview) if enabled
 
 ## Steps to run
 1. Clone repository
@@ -13,6 +14,7 @@ This application is powered by the NYC Open Data API. (https://opendata.cityofne
 3. (Optional) If you'd like images, open app/build.gradle
     - Set the 'PLACES_API_ENABLED' build config to true
     - Open keystore.properties and provide a Google Places API Key
+5. To view more traditional implementation (RecyclerView) you can also set 'COMPOSE_VIEW' to false in the build config.
 4. Run the project.
 
 ![alt text](NYC_School_Viewer_App.png)
@@ -25,6 +27,9 @@ This application is powered by the NYC Open Data API. (https://opendata.cityofne
 * Dagger - Dependency injection (https://github.com/google/dagger)
 * Stetho - More debugging (https://github.com/facebook/stetho)
 * ktlint - Linting / code quality (https://ktlint.github.io/)
+* Landscapist - For loading images with Jetpack Compose (https://github.com/skydoves/landscapist)
+* Coroutines
+* Compose
 * Image Icons / Assets came from https://material.io/resources/icons/
 
 ### APIs

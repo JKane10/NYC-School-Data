@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">04042020-JoshKane-NYCSchools</string>
+    <string name="app_name">NYC School List</string>
     <string name="user_error_msg">Sorry, something went wrong.</string>
     <string name="no_sat_scores">Sorry, no SAT scores were found for this school.</string>
     <string name="description_format">Description: %s</string>
