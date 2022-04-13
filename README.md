@@ -22,7 +22,7 @@ as the [Google Places API](https://developers.google.com/maps/documentation/plac
 ### Libraries / Dependencies used
 * Retrofit - Network calls (https://square.github.io/retrofit/)
 * RxJava - Reactive functionality (http://reactivex.io/) or (https://github.com/ReactiveX/RxJava)
-* Chuck - HTTP inspection (debugging) (https://github.com/jgilfelt/chuck)
+* Chucker - HTTP inspection (debugging) (https://github.com/ChuckerTeam/chucker)
 * Glide - Image loading (https://github.com/bumptech/glide)
 * Dagger - Dependency injection (https://github.com/google/dagger)
 * Stetho - More debugging (https://github.com/facebook/stetho)
