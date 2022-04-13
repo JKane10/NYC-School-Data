@@ -2,6 +2,7 @@ package com.jkane.a20220402_joshkane_nycschools.network.dagger;
 
 import android.content.Context;
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.GsonBuilder;
 import com.jkane.a20220402_joshkane_nycschools.BuildConfig;
@@ -11,7 +12,6 @@ import com.jkane.a20220402_joshkane_nycschools.network.repositories.GooglePlaces
 import com.jkane.a20220402_joshkane_nycschools.network.repositories.GooglePlacesRepository;
 import com.jkane.a20220402_joshkane_nycschools.network.repositories.NYCSchoolRepositoryImpl;
 import com.jkane.a20220402_joshkane_nycschools.network.repositories.NYCSchoolsRepository;
-import com.readystatesoftware.chuck.ChuckInterceptor;
 
 import java.io.IOException;
 
@@ -47,7 +47,7 @@ public class NetworkModule {
     @Provides
     public NYCSchoolsAPI providesCityOfNewYorkAPI() {
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(new ChuckInterceptor(mContext))
+                .addInterceptor(new ChuckerInterceptor(mContext))
                 .build();
 
         GsonConverterFactory gsonFactory = GsonConverterFactory.create(
@@ -68,7 +68,7 @@ public class NetworkModule {
     GooglePlacesAPI providesGooglePlacesAPI() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new GoogleMapsInterceptor())
-                .addInterceptor(new ChuckInterceptor(mContext))
+                .addInterceptor(new ChuckerInterceptor(mContext))
                 .build();
 
         GsonConverterFactory gsonFactory = GsonConverterFactory.create(

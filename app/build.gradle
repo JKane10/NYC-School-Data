@@ -86,6 +86,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation "com.google.android.material:material:1.5.0"
 
     // Retrofit dependencies for network calls
     // https://square.github.io/retrofit/
@@ -101,8 +103,13 @@ dependencies {
 
     // Chuck dependencies for HTTP inspection
     // https://github.com/jgilfelt/chuck
-    debugImplementation "com.readystatesoftware.chuck:library:$chuck_version"
-    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck_version"
+    // REMOVED CHUCK AND REPLACED WITH CHUCKER AS CHUCK IS CAUSING ISSUE WITH API 31.
+    // SEE https://github.com/jgilfelt/chuck/pull/104
+    // debugImplementation "com.readystatesoftware.chuck:library:$chuck_version"
+    // releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuck_version"
+    // https://github.com/ChuckerTeam/chucker
+    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
     // Dagger dependencies for dependency injection
     // https://github.com/google/dagger
